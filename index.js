@@ -18,9 +18,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.json())
 app.use(cors());
 
-db();
+// db();
 
-app.use('/api',require('./src/routes'));
+// app.use('/api',require('./src/routes'));
 
 const PORT = process.env.LISTEN_PORT || 4000;
 app.get("/", (req, res) => {

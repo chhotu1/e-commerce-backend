@@ -11,7 +11,7 @@ exports.category = {
 			title,
 		});
 		if (category) {
-			return res.json({ status: false, message: "Category already exists" });
+			return res.json({ status: false, message: "Category already exists",data:{} });
 		}
 		let photo = "";
 		if (req.files) {
@@ -24,8 +24,8 @@ exports.category = {
 			let sampleFile = req.files.photo;
 			let fileName = sampleFile.name.split(".");
 			fileName = fileName[0] + Date.now() + "." + fileName[1];
-			photo = '/uploads/category/'+fileName;
-			sampleFile.mv("./uploads/category/" + fileName, function (err) {
+			photo = '/src/uploads/category/'+fileName;
+			sampleFile.mv("./src/uploads/category/" + fileName, function (err) {
 				if (err) return res.json({
 					message:err,
 					status:false,
@@ -34,7 +34,7 @@ exports.category = {
 		}
 		category = new Category({
 			title,
-			photo,
+			image:photo,
 			created_by: userId,
 		});
 		await category.save();
@@ -47,6 +47,7 @@ exports.category = {
       return res.json({
 		  message:'Error in Saving',
 		  status:false,
+		  data:{}
 	  });
     }
   },

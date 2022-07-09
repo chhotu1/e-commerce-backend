@@ -11,16 +11,26 @@ exports.Product = {
 				if (!req.files || Object.keys(req.files).length === 0) {
 					return res.status(400).send('No files were uploaded.');
 				}
-				if (req.files.photo) {
-					let sampleFile = req.files.photo;
-					let fileName = sampleFile.name.split(".");
-					fileName = fileName[0] + Date.now() + '.' + fileName[1];
-					photo='/uploads/products/'+fileName;
-					sampleFile.mv('./uploads/products/' + fileName, function (err) {
-						if (err)
-							return res.status(500).send(err);
+				let sampleFile = req.files.photo[0];
+				let fileName = sampleFile.name.split(".");
+				fileName = fileName[0] + Date.now() + "." + fileName[1];
+				photo = '/src/uploads/products/'+fileName;
+				sampleFile.mv("./src/uploads/products/" + fileName, function (err) {
+					if (err) return res.json({
+						message:err,
+						status:false,
 					});
-				}
+				});
+				// if (req.files.photo) {
+				// 	let sampleFile = req.files.photo;
+				// 	let fileName = sampleFile.name.split(".");
+				// 	fileName = fileName[0] + Date.now() + '.' + fileName[1];
+				// 	photo='/src/uploads/products/'+fileName;
+				// 	sampleFile.mv('./src/uploads/products/' + fileName, function (err) {
+				// 		if (err)
+				// 			return res.status(500).send(err);
+				// 	});
+				// }
 			}
 
 			let payload = {
@@ -28,7 +38,7 @@ exports.Product = {
 				category_id,
 				phone, address,
 				created_by: userId,
-				photo: photo,
+				image: photo,
 				offer_price,
 				offer,
 				slug,
@@ -39,7 +49,8 @@ exports.Product = {
 			await product.save();
 			return res.status(200).json({ status: true, data: product, message: 'Product added successfully' })
 		} catch (error) {
-			return res.status(400).json({ status: false, data: '', message: 'Error in Saving' })
+			console.log(error)
+			return res.status(400).json({ status: false, data: {}, message: 'Error in Saving' })
 		}
 	},
 	list: async function (req, res) {

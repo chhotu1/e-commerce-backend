@@ -18,7 +18,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(bodyParser.json())
 app.use(cors());
 
-// db();
+db();
 
 // app.use('/api',require('./src/routes'));
 

@@ -54,7 +54,7 @@ app.post('/testing', function (req, res) {
     // req.body will hold the text fields of the form
  });
 
- app.get('/test', function (req, res) {
+ app.get('/', function (req, res) {
     res.send({ fileName: 'welcome Messages' });
   
  });

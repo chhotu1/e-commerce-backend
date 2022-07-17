@@ -41,6 +41,7 @@ function loginValidation(req, res, next) {
 function categoryValidation(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
+        image_url: Joi.string(),
     });
     validateRequest.validateRequired(req,res, next, schema);
 }

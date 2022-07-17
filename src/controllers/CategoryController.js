@@ -34,7 +34,7 @@ exports.category = {
 		}
 		category = new Category({
 			title,
-			image:photo?photo:image_url,
+			image:photo!==''?photo:image_url,
 			created_by: userId,
 		});
 		await category.save();

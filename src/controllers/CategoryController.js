@@ -4,7 +4,7 @@ var Product = require("./../models/Product");
 var appRoot = process.env.PWD;
 exports.category = {
   store: async function (req, res) {
-    const { title } = req.body;
+    const { title,image_url } = req.body;
     let userId = req.user._id;
     try {
 		let category = await Category.findOne({
@@ -34,7 +34,7 @@ exports.category = {
 		}
 		category = new Category({
 			title,
-			image:photo,
+			image:photo?photo:image_url,
 			created_by: userId,
 		});
 		await category.save();

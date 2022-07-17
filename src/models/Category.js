@@ -9,6 +9,7 @@ const CategorySchema = mongoose.Schema({
         ref: 'User'
     },
     image:String,
+    image_name:String,
     description:String,
     status: {
         type: Number,

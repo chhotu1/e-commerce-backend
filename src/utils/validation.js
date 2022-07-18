@@ -60,6 +60,7 @@ async function productValidation(req, res, next) {
         slug:Joi.string(),
         discription:Joi.string(),
         image_url: Joi.string(),
+        image_name:Joi.string(),
         
     });
     await validateRequest.validateRequired(req,res, next, schema);

@@ -3,7 +3,7 @@ const Product = require('./../models/Product');
 
 exports.Product = {
 	store: async function (req, res) {
-		const { title, category_id, phone, address,offer,offer_price,slug,price,discription,image_url } = req.body;
+		const { title, category_id, phone, address,offer,offer_price,slug,price,discription,image_url,image_name } = req.body;
 		let userId = req.user._id;
 		try {
 			let photo = '';
@@ -43,7 +43,8 @@ exports.Product = {
 				offer,
 				slug,
 				price,
-				discription
+				discription,
+				image_name
 			};
 			let product = new Product(payload);
 			await product.save();

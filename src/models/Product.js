@@ -10,6 +10,7 @@ const ProductSchema = mongoose.Schema({
         ref: 'Category'
     },
     image:String,
+    image_name:String,
     galleries:Array,
     price:String,
     discription:String,

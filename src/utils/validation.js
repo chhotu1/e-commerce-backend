@@ -59,6 +59,7 @@ async function productValidation(req, res, next) {
         offer_price:Joi.number().integer().min(0).max(400),
         slug:Joi.string(),
         discription:Joi.string(),
+        image_url: Joi.string(),
         
     });
     await validateRequest.validateRequired(req,res, next, schema);

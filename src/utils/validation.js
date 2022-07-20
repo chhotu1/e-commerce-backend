@@ -52,15 +52,15 @@ async function productValidation(req, res, next) {
         title: Joi.string().required(),
         category_id: Joi.string().required(),
         price: Joi.string().required(),
-        address: Joi.string(),
+        // address: Joi.string(),
         // phone: Joi.number().integer().min(1000000000).message("Invalid mobile number").max(9999999999).message("Invalid mobile number"),
         // photo: Joi.string(),
-        offer:Joi.number().integer().min(0).max(1),
-        offer_price:Joi.number().integer().min(0).max(400),
-        slug:Joi.string(),
-        discription:Joi.string(),
-        image_url: Joi.string(),
-        image_name:Joi.string(),
+        // offer:Joi.number().integer().min(0).max(1),
+        // offer_price:Joi.number().integer().min(0).max(400),
+        // slug:Joi.string(),
+        // discription:Joi.string(),
+        // image_url: Joi.string(),
+        // image_name:Joi.string(),
         
     });
     await validateRequest.validateRequired(req,res, next, schema);

@@ -2,8 +2,10 @@
 var User = require('./../models/User');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Response = require('./../utils/Response')
 exports.auth = {
     register: async function (req, res, next) {
+
         const {
             name,
             email,
@@ -17,21 +19,11 @@ exports.auth = {
                 email
             });
             if (user) {
-                return res.json({
-                    message: "User Already Exists",
-                    status:false,
-                    data:{},
-                });
+                let result = { message: "User Already Exists" };
+                return res.json(Response.Response(result));
             }
 
-            user = new User({
-                name,
-                email,
-                password,
-                phone,
-                address,
-                role
-            });
+            user = new User(req.body);
 
             await user.save();
             const payload = {
@@ -45,17 +37,14 @@ exports.auth = {
             },
                 (err, token) => {
                     if (err) throw err;
-                    return res.status(200).json({
-                        token,
-                        data: user,
-                        status:true,
-                        message:'User added successfully'
-                    });
+                    user['token'] = token;
+                    let result = { message: "User added successfully",data:user,status:true };
+                    return res.json(Response.Response(result));
                 }
             );
         }
         catch (err) {
-            res.status(500).send("Error in Saving");
+            return res.json(Response.Response({message: "Error in Saving",errors:err}));
         }
     },
     login: async function (req, res, next) {

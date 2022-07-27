@@ -41,6 +41,8 @@ const UserSchema = mongoose.Schema({
     other_phone: String,
     friend_phone: String,
     photo: String,
+    image_name:String,
+    access_token: String,
     status: {
         type: Number,
         default: 1

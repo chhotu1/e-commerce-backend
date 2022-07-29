@@ -2,7 +2,8 @@ const router = require('express').Router();
 const AuthController = require('./controllers/AuthController');
 const UserController = require('./controllers/UserController');
 const CategoryController = require('./controllers/CategoryController')
-const ProductController = require('./controllers/ProductController')
+const ProductController = require('./controllers/ProductController');
+const SeederController = require('./controllers/SeederController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -10,6 +11,10 @@ const middleware = require('./middleware/Auth');
 //authController
 router.route('/register').post(validation.registerValidation,AuthController.auth.register);
 router.route('/login').post(validation.loginValidation,AuthController.auth.login);
+
+router.route('/country').get(SeederController.sedeer.country);
+router.route('/state').get(SeederController.sedeer.state);
+router.route('/city').get(SeederController.sedeer.city);
 
 //userController
 router.route('/user').get(middleware,UserController.user.getAllUsers);

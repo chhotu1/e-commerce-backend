@@ -43,8 +43,10 @@ const UserSchema = mongoose.Schema({
     photo: String,
     image_name:String,
     access_token: String,
+    image_url:String,
     status: {
         type: Number,
+        enum: [1,2,3,4,5],
         default: 1
     },
     created_at: {

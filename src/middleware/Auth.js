@@ -7,7 +7,7 @@ module.exports = function(req, res, next) {
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
     req.user = decoded.user;
     let user_role = req.user.role;
-    console.log(user_role,'user')
+    // console.log(user_role,'user')
     // if(user_role!==config.ROLE.ADMIN)return res.json({ message: "You are not Authorized",status:false });
     next();
   } catch (e) {

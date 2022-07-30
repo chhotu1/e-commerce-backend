@@ -95,17 +95,17 @@ exports.user = {
         }
     },
     update: async function (req, res) {
-        const { name, phone, address, email } = req.body;
+        const { name, phone, email } = req.body;
         let user_email = await User.findOne({
             _id: req.params.id
         });
         if (user_email) {
-            if (user_email.email != email) {
+            if (user_email.email !== email) {
                 let user = await User.findOne({
                     email
                 });
                 if (user) {
-                    if (user_email.email != email) {
+                    if (user_email.email !== email) {
                         return res.json({
                             message: "User Already Exists",
                             status: false
@@ -115,12 +115,7 @@ exports.user = {
             }
         }
 
-        await User.findByIdAndUpdate(req.params.id, {
-            name: name,
-            phone: phone,
-            address: address,
-            email: email
-        }, { new: true })
+        await User.findByIdAndUpdate(req.params.id,req.body, { new: true })
             .then(user => {
                 if (!user) {
                     return res.json({ status: false, success: false, data: '', message: "user not found with id" + req.params.id });

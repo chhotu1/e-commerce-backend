@@ -48,7 +48,6 @@ app.post('/api/uploadImage', function (req, res) {
 app.use('/api',require('./src/routes'));
 
 app.post('/testing', function (req, res) {
-    console.log(req.body)
     res.send({ fileName: 'welcome Messages' });
     // req.file will now hold the uploaded file
     // req.body will hold the text fields of the form

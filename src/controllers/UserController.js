@@ -1,17 +1,22 @@
 
 var User = require('./../models/User');
 const bcrypt = require("bcryptjs");
+const Response = require('./../utils/Response')
 
 // const userService = require('./../service/user.service')
 exports.user = {
     getAllUsers: function (req, res) {
-        User.find({}, function (err, users) {
-            if (err) {
-                res.json({ status: false, success: false, statusCode: 500, errorMessage: err });
-            }
-            res.json({ status: true, success: true, statusCode: 200, data: users });
+        let userId = req.user._id;
+        User.find({_id:{ $ne: userId }}).sort({created_at: -1})
+        .then((data) => {
+            let result = { message: "Users data",status: true,data:data };
+            return res.json(Response.Response(result));
         })
+        .catch((error) => {
+            return res.json({ status: false, success: true, statusCode: 40 });
+        });
     },
+
     showOne: async function (req, res) {
         if (!req.params.id) {
             return res.json({ status: false, success: false, data: '', message: "User id can not be empty " });
@@ -114,7 +119,8 @@ exports.user = {
                 }
             }
         }
-
+        
+        delete req.body.password;
         await User.findByIdAndUpdate(req.params.id,req.body, { new: true })
             .then(user => {
                 if (!user) {

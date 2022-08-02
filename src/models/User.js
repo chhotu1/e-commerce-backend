@@ -44,6 +44,7 @@ const UserSchema = mongoose.Schema({
     image_name:String,
     access_token: String,
     image_url:String,
+    designation:String,
     status: {
         type: Number,
         enum: [1,2,3,4,5],

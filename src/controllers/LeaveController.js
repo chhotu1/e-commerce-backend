@@ -5,6 +5,7 @@ exports.leave = {
         const { title, image_url, image_name } = req.body;
         let userId = req.user._id;
         try {
+            req.body['created_by'] = userId;
             data = new Leave(req.body);
             await data.save();
             let result = { message: "Record added successfully", data: data, status: true };

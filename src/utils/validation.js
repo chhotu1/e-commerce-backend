@@ -47,6 +47,15 @@ function categoryValidation(req, res, next) {
     validateRequest.validateRequired(req,res, next, schema);
 }
 
+function leaveValidation(req, res, next) {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        // image_url: Joi.string(),
+        // image_name: Joi.string(),
+    });
+    validateRequest.validateRequired(req,res, next, schema);
+}
+
 async function productValidation(req, res, next) {
     const schema = await Joi.object({
         title: Joi.string().required(),
@@ -70,6 +79,7 @@ module.exports = {
     registerValidation,loginValidation,categoryValidation,
     profileUpdateValidation,
     productValidation,
-    changePassword
+    changePassword,
+    leaveValidation
 }
 

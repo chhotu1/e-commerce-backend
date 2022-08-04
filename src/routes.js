@@ -4,6 +4,7 @@ const UserController = require('./controllers/UserController');
 const CategoryController = require('./controllers/CategoryController')
 const ProductController = require('./controllers/ProductController');
 const SeederController = require('./controllers/SeederController');
+const LeaveController = require('./controllers/LeaveController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -24,6 +25,13 @@ router.route('/user/:id').delete(middleware,UserController.user.delete);
 router.route('/user/:id').put(middleware,validation.profileUpdateValidation,UserController.user.update);
 router.route('/user/profilePhotoChange').post(middleware,UserController.user.profilePhotoChange);
 router.route('/change-password').post(middleware,validation.changePassword,UserController.user.changePassword);
+
+//leave
+router.route('/leave').post(validation.leaveValidation,middleware,LeaveController.leave.store);
+router.route('/leave/:id').put(validation.leaveValidation,middleware,LeaveController.leave.update);
+router.route('/leave/:id').delete(middleware,LeaveController.leave.delete);
+router.route('/leave').get(LeaveController.leave.list);
+router.route('/leave/:id').get(LeaveController.leave.showOne);
 
 //categories
 router.route('/categories').post(validation.categoryValidation,middleware,CategoryController.category.store);

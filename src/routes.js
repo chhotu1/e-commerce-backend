@@ -30,8 +30,8 @@ router.route('/change-password').post(middleware,validation.changePassword,UserC
 router.route('/leave').post(validation.leaveValidation,middleware,LeaveController.leave.store);
 router.route('/leave/:id').put(validation.leaveValidation,middleware,LeaveController.leave.update);
 router.route('/leave/:id').delete(middleware,LeaveController.leave.delete);
-router.route('/leave').get(LeaveController.leave.list);
-router.route('/leave/:id').get(LeaveController.leave.showOne);
+router.route('/leave').get(middleware,LeaveController.leave.list);
+router.route('/leave/:id').get(middleware,LeaveController.leave.showOne);
 
 //categories
 router.route('/categories').post(validation.categoryValidation,middleware,CategoryController.category.store);

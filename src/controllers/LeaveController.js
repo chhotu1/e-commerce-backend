@@ -16,7 +16,9 @@ exports.leave = {
         }
     },
     list: async function (req, res) {
-        Leave.find()
+        let userId = req.user._id;
+        let role = req.user.role;
+        Leave.find(role===1 || role===2?{}:{created_by: userId})
             .populate("created_by")
             .then((data) => {
                 let result = { message: "Leave record", data: data, status: true };

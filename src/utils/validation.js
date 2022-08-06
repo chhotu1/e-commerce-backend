@@ -55,6 +55,16 @@ function leaveValidation(req, res, next) {
     });
     validateRequest.validateRequired(req,res, next, schema);
 }
+function notificationValidation(req, res, next) {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        // image_url: Joi.string(),
+        // image_name: Joi.string(),
+    });
+    validateRequest.validateRequired(req,res, next, schema);
+}
+
+
 
 async function productValidation(req, res, next) {
     const schema = await Joi.object({
@@ -80,6 +90,7 @@ module.exports = {
     profileUpdateValidation,
     productValidation,
     changePassword,
-    leaveValidation
+    leaveValidation,
+    notificationValidation
 }
 

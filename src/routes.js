@@ -5,6 +5,7 @@ const CategoryController = require('./controllers/CategoryController')
 const ProductController = require('./controllers/ProductController');
 const SeederController = require('./controllers/SeederController');
 const LeaveController = require('./controllers/LeaveController');
+const NotificationController = require('./controllers/NotificationController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -32,6 +33,13 @@ router.route('/leave/:id').put(validation.leaveValidation,middleware,LeaveContro
 router.route('/leave/:id').delete(middleware,LeaveController.leave.delete);
 router.route('/leave').get(middleware,LeaveController.leave.list);
 router.route('/leave/:id').get(middleware,LeaveController.leave.showOne);
+
+//NotificationController
+router.route('/notification').post(validation.notificationValidation,middleware,NotificationController.notification.store);
+router.route('/notification/:id').put(validation.notificationValidation,middleware,NotificationController.notification.update);
+router.route('/notification/:id').delete(middleware,NotificationController.notification.delete);
+router.route('/notification').get(middleware,NotificationController.notification.list);
+router.route('/notification/:id').get(middleware,NotificationController.notification.showOne);
 
 //categories
 router.route('/categories').post(validation.categoryValidation,middleware,CategoryController.category.store);

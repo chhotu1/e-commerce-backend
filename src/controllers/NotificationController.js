@@ -17,7 +17,7 @@ exports.notification = {
     list: async function (req, res) {
         let userId = req.user._id;
         let role = req.user.role;
-        Notification.find(role===1 || role===2?{}:{created_by: userId})
+        Notification.find({})
             .populate("created_by")
             .then((data) => {
                 let result = { message: "Notification record", data: data, status: true };

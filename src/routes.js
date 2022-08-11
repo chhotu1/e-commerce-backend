@@ -6,6 +6,7 @@ const ProductController = require('./controllers/ProductController');
 const SeederController = require('./controllers/SeederController');
 const LeaveController = require('./controllers/LeaveController');
 const NotificationController = require('./controllers/NotificationController');
+const TimerController = require('./controllers/TimerController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -40,6 +41,14 @@ router.route('/notification/:id').put(validation.notificationValidation,middlewa
 router.route('/notification/:id').delete(middleware,NotificationController.notification.delete);
 router.route('/notification').get(middleware,NotificationController.notification.list);
 router.route('/notification/:id').get(middleware,NotificationController.notification.showOne);
+
+//timer
+router.route('/timer').post(middleware,TimerController.timer.store);
+router.route('/timer/:id').put(middleware,TimerController.timer.update);
+router.route('/timer/:id').delete(middleware,TimerController.timer.delete);
+router.route('/timer').get(middleware,TimerController.timer.list);
+router.route('/timer/:id').get(middleware,TimerController.timer.showOne);
+router.route('/latest-timer').get(middleware,TimerController.timer.getLatestTimer);
 
 //categories
 router.route('/categories').post(validation.categoryValidation,middleware,CategoryController.category.store);

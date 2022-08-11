@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 const TimerSchema = mongoose.Schema({
     total_hours:String,
-    status: {
-        type: String,
-        enum: ['start_timer','end_timer'],
-        default: 'start_timer'
-    },
+    status: Boolean,
     created_by: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

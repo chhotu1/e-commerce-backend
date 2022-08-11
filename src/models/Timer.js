@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const TimerSchema = mongoose.Schema({
     total_hours:String,
     status: Boolean,
+    total_second: Number,
     created_by: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

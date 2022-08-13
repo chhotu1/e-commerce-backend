@@ -4,9 +4,13 @@ exports.attendence = {
     store: async function (req, res) {
         let userId = req.user._id;
         try {
-            req.body['created_by'] = userId;
-            data = new Attendence(req.body);
-            await data.save();
+            let users =req.body;
+            if(!Array.isArray(users)){
+                let result = { message: "This record is not array" };
+                return res.json(Response.Response(result));
+            }
+            users.map((e)=>e['created_by']=userId);
+            let data = await Attendence.insertMany(users);
             let result = { message: "Record added successfully", data: data, status: true };
             return res.json(Response.Response(result));
         } catch (error) {

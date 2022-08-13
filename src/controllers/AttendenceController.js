@@ -44,7 +44,7 @@ exports.attendence = {
         })
     },
     update: async function (req, res) {
-        await Attendence.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        await Attendence.findByIdAndUpdate(req.params.id, {present:req.body.present}, { new: true })
             .then(attendence => {
                 if (!attendence) {
                     return res.json({ status: false, success: false, data: '', message: "Attendence not found with id" + req.params.id });

@@ -7,6 +7,7 @@ const SeederController = require('./controllers/SeederController');
 const LeaveController = require('./controllers/LeaveController');
 const NotificationController = require('./controllers/NotificationController');
 const TimerController = require('./controllers/TimerController');
+const AttendenceController = require('./controllers/AttendenceController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -49,6 +50,13 @@ router.route('/timer/:id').delete(middleware,TimerController.timer.delete);
 router.route('/timer').get(middleware,TimerController.timer.list);
 router.route('/timer/:id').get(middleware,TimerController.timer.showOne);
 router.route('/latest-timer').get(middleware,TimerController.timer.getLatestTimer);
+
+//attendence
+router.route('/attendence').post(middleware,AttendenceController.attendence.store);
+router.route('/attendence/:id').put(middleware,AttendenceController.attendence.update);
+router.route('/attendence/:id').delete(middleware,AttendenceController.attendence.delete);
+router.route('/attendence').get(middleware,AttendenceController.attendence.list);
+router.route('/attendence/:id').get(middleware,AttendenceController.attendence.showOne);
 
 //categories
 router.route('/categories').post(validation.categoryValidation,middleware,CategoryController.category.store);

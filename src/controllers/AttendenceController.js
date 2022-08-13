@@ -37,7 +37,7 @@ exports.attendence = {
         if (!req.params.id) {
             return res.json({ status: false, success: false, data: '', message: "Attendence id can not be empty" + req.params.id });
         }
-        await Attendence.findById(req.params.id).then(data => {
+        await Attendence.findById(req.params.id).populate("user_id").then(data => {
             return res.json({ status: true, success: true, statusCode: 200, data: data });
         }).catch(error => {
             return res.json({ status: false, success: false, statusCode: 40, data: error });

@@ -8,6 +8,7 @@ const LeaveController = require('./controllers/LeaveController');
 const NotificationController = require('./controllers/NotificationController');
 const TimerController = require('./controllers/TimerController');
 const AttendenceController = require('./controllers/AttendenceController');
+const HolidaysController = require('./controllers/HolidaysController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -58,6 +59,12 @@ router.route('/attendence/:id').delete(middleware,AttendenceController.attendenc
 router.route('/attendence').get(middleware,AttendenceController.attendence.list);
 router.route('/attendence/:id').get(middleware,AttendenceController.attendence.showOne);
 
+//holidays
+router.route('/holidays').post(validation.holidaysValidation,middleware,HolidaysController.holidays.store);
+router.route('/holidays/:id').put(validation.holidaysValidation,middleware,HolidaysController.holidays.update);
+router.route('/holidays/:id').delete(middleware,HolidaysController.holidays.delete);
+router.route('/holidays').get(middleware,HolidaysController.holidays.list);
+router.route('/holidays/:id').get(middleware,HolidaysController.holidays.showOne);
 //categories
 router.route('/categories').post(validation.categoryValidation,middleware,CategoryController.category.store);
 router.route('/categories/:id').delete(middleware,CategoryController.category.delete);

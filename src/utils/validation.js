@@ -58,8 +58,12 @@ function leaveValidation(req, res, next) {
 function notificationValidation(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
-        // image_url: Joi.string(),
-        // image_name: Joi.string(),
+    });
+    validateRequest.validateRequired(req,res, next, schema);
+}
+function holidaysValidation(req, res, next) {
+    const schema = Joi.object({
+        title: Joi.string().required(),
     });
     validateRequest.validateRequired(req,res, next, schema);
 }
@@ -91,6 +95,6 @@ module.exports = {
     productValidation,
     changePassword,
     leaveValidation,
-    notificationValidation
+    notificationValidation,holidaysValidation
 }
 

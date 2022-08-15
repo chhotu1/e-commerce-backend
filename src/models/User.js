@@ -45,6 +45,7 @@ const UserSchema = mongoose.Schema({
     access_token: String,
     image_url:String,
     designation:String,
+    monthly_salary:Number,
     status: {
         type: Number,
         enum: [1,2,3,4,5],

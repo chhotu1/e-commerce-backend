@@ -10,6 +10,7 @@ const TimerController = require('./controllers/TimerController');
 const AttendenceController = require('./controllers/AttendenceController');
 const HolidaysController = require('./controllers/HolidaysController');
 const AppraisalController = require('./controllers/AppraisalController');
+const DashboardController = require('./controllers/DashboardController');
 
 const validation = require('./utils/validation');
 const middleware = require('./middleware/Auth');
@@ -73,6 +74,10 @@ router.route('/appraisals/:id').put(validation.appraisalsValidation, middleware,
 router.route('/appraisals/:id').delete(middleware, AppraisalController.appraisals.delete);
 router.route('/appraisals').get(middleware, AppraisalController.appraisals.list);
 router.route('/appraisals/:id').get(middleware, AppraisalController.appraisals.showOne);
+
+//dashboard
+router.route('/dashboard').get(middleware, DashboardController.dashboard.dashboard);
+
 
 //categories
 router.route('/categories').post(validation.categoryValidation, middleware, CategoryController.category.store);

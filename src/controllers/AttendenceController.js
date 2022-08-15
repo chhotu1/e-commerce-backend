@@ -21,7 +21,7 @@ exports.attendence = {
     list: async function (req, res) {
         let userId = req.user._id;
         let role = req.user.role;
-        Attendence.find({}).sort({created_at: -1})
+        Attendence.find(role===1 || role===2?{}:{user_id: userId}).sort({created_at: -1})
             .populate("created_by")
             .populate("user_id")
             .then((data) => {

@@ -46,6 +46,7 @@ const UserSchema = mongoose.Schema({
     image_url:String,
     designation:String,
     monthly_salary:Number,
+    employee_code:String,
     status: {
         type: Number,
         enum: [1,2,3,4,5],
